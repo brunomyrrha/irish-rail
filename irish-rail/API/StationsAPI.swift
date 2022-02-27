@@ -7,7 +7,15 @@
 
 import Foundation
 
-class StationsAPI: BaseAPI<Station> {
+protocol StationsAPI {
+    
+    func fetchStations() async -> Result<[Station], Error>
+    
+    func fetchStations(type: StationType) async -> Result<[Station], Error>
+    
+}
+
+class StationsAPIBase: BaseAPI<Station>, StationsAPI {
     
     private enum Constants {
     
@@ -19,42 +27,24 @@ class StationsAPI: BaseAPI<Station> {
         
     }
     
-    enum URLStationType: Int {
-        case all
-        case mainline
-        case suburban
-        case dart
-        
-        var key: String { "StationType" }
-        var value: String {
-            switch self {
-            case .dart: return "D"
-            case .suburban: return "S"
-            case .mainline: return "M"
-            default: return "A"
-            }
-        }
-        
-    }
-    
     // MARK: - Shared
     
-    static let shared = StationsAPI()
+    static let shared = StationsAPIBase()
     private override init() {
         super.init()
     }
     
     // MARK: - Public methods
     
-    func fetchStations(completion: @escaping (Result<[Station], Error>) -> Void) {
+    func fetchStations() async -> Result<[Station], Error> {
         let url = makeURL(path: Constants.allStationsPath)
-        super.makeRequest(url: url, completion: completion)
+        return await super.makeRequest(url: url)
     }
     
-    func fetchStations(type: URLStationType, completion: @escaping(Result<[Station], Error>) -> Void) {
+    func fetchStations(type: StationType) async -> Result<[Station], Error> {
         let queryItem = URLQueryItem(name: type.key, value: type.value)
         let url = makeURL(path: Constants.allStationsWithTypeURL, queryItems: [queryItem])
-        super.makeRequest(url: url, completion: completion)
+        return await super.makeRequest(url: url)
     }
     
     // MARK: - BaseAPI methods

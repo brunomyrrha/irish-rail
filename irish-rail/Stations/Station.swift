@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Station {
+struct Station: Equatable {
     
     private enum Keys {
         
@@ -21,18 +21,20 @@ struct Station {
     }
     
     var id: Int
+    var description: String
     var code: String?
     var alias: String?
-    var description: String?
     var latitude: Double?
     var longitude: Double?
     
     init?(from dictionary: [String: Any]) {
-        guard let idString = dictionary[Keys.id] as? String, let id = Int(idString) else { return nil }
+        guard let idString = dictionary[Keys.id] as? String,
+              let id = Int(idString),
+              let description = dictionary[Keys.description] as? String else { return nil }
         self.id = id
+        self.description = description
         code = dictionary[Keys.code] as? String
         alias = dictionary[Keys.alias] as? String
-        description = dictionary[Keys.description] as? String
         if let latitudeString = dictionary[Keys.latitude] as? String {
             latitude = Double(latitudeString)
         }

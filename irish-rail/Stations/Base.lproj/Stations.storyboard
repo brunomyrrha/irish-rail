@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,11 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YOp-so-rVG">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                <color key="color" name="AccentColor"/>
+                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="doZ-JV-SdM">
                                 <rect key="frame" x="0.0" y="119" width="414" height="743"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StationCell" textLabel="yts-wz-8U1" style="IBUITableViewCellStyleDefault" id="5Ft-hs-r7f">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StationCell" textLabel="yts-wz-8U1" style="IBUITableViewCellStyleDefault" id="5Ft-hs-r7f">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Ft-hs-r7f" id="hyV-YE-lPv">
@@ -56,6 +61,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Yy4-fj-bzK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5Gj-2a-eWw"/>
+                            <constraint firstItem="YOp-so-rVG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NMY-dq-ie4"/>
+                            <constraint firstItem="YOp-so-rVG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Xu8-KT-GC4"/>
                             <constraint firstItem="Yy4-fj-bzK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cTm-Ep-qnn"/>
                             <constraint firstItem="doZ-JV-SdM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="d05-zZ-47v"/>
                             <constraint firstItem="doZ-JV-SdM" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jpD-iI-0zh"/>
@@ -76,6 +83,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		521FDF8C27CBED8F00BAC602 /* StationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521FDF8B27CBED8F00BAC602 /* StationsCoordinator.swift */; };
 		5242EC7B27CC111800DC980A /* StationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5242EC7A27CC111800DC980A /* StationsAPI.swift */; };
+		5245C18427CC35E3006B592B /* StationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245C18327CC35E3006B592B /* StationType.swift */; };
+		5245C18627CC3AC2006B592B /* StationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245C18527CC3AC2006B592B /* StationsViewModel.swift */; };
+		5245C18827CC3B4A006B592B /* StationsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245C18727CC3B4A006B592B /* StationsViewModelTests.swift */; };
 		52CA031827CAB85E006F93FF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CA031727CAB85E006F93FF /* Coordinator.swift */; };
 		52CA031A27CAB89F006F93FF /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CA031927CAB89F006F93FF /* UIViewController+Extensions.swift */; };
 		52CA031C27CABAC0006F93FF /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CA031B27CABAC0006F93FF /* AppCoordinator.swift */; };
@@ -18,9 +21,6 @@
 		52EA918A27CA408600FF632C /* Stations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EA918827CA408600FF632C /* Stations.storyboard */; };
 		52EA918C27CA408800FF632C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52EA918B27CA408800FF632C /* Assets.xcassets */; };
 		52EA918F27CA408800FF632C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EA918D27CA408800FF632C /* LaunchScreen.storyboard */; };
-		52EA919A27CA408800FF632C /* irish_railTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA919927CA408800FF632C /* irish_railTests.swift */; };
-		52EA91A427CA408800FF632C /* irish_railUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA91A327CA408800FF632C /* irish_railUITests.swift */; };
-		52EA91A627CA408800FF632C /* irish_railUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA91A527CA408800FF632C /* irish_railUITestsLaunchTests.swift */; };
 		52EA91B327CA4F2A00FF632C /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA91B227CA4F2A00FF632C /* Station.swift */; };
 		52EA91B527CA50CE00FF632C /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA91B427CA50CE00FF632C /* BaseAPI.swift */; };
 		52EA91B727CA922300FF632C /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA91B627CA922300FF632C /* String+Extension.swift */; };
@@ -46,6 +46,9 @@
 /* Begin PBXFileReference section */
 		521FDF8B27CBED8F00BAC602 /* StationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsCoordinator.swift; sourceTree = "<group>"; };
 		5242EC7A27CC111800DC980A /* StationsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsAPI.swift; sourceTree = "<group>"; };
+		5245C18327CC35E3006B592B /* StationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationType.swift; sourceTree = "<group>"; };
+		5245C18527CC3AC2006B592B /* StationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsViewModel.swift; sourceTree = "<group>"; };
+		5245C18727CC3B4A006B592B /* StationsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StationsViewModelTests.swift; path = "irish-railTests/StationsViewModelTests.swift"; sourceTree = "<group>"; };
 		52CA031727CAB85E006F93FF /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		52CA031927CAB89F006F93FF /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		52CA031B27CABAC0006F93FF /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -58,10 +61,7 @@
 		52EA918E27CA408800FF632C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52EA919027CA408800FF632C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52EA919527CA408800FF632C /* irish-railTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "irish-railTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		52EA919927CA408800FF632C /* irish_railTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = irish_railTests.swift; sourceTree = "<group>"; };
 		52EA919F27CA408800FF632C /* irish-railUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "irish-railUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		52EA91A327CA408800FF632C /* irish_railUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = irish_railUITests.swift; sourceTree = "<group>"; };
-		52EA91A527CA408800FF632C /* irish_railUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = irish_railUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		52EA91B227CA4F2A00FF632C /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		52EA91B427CA50CE00FF632C /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		52EA91B627CA922300FF632C /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -97,7 +97,9 @@
 			children = (
 				52EA918827CA408600FF632C /* Stations.storyboard */,
 				52EA91B227CA4F2A00FF632C /* Station.swift */,
+				5245C18527CC3AC2006B592B /* StationsViewModel.swift */,
 				52EA918627CA408600FF632C /* StationsViewController.swift */,
+				5245C18327CC35E3006B592B /* StationType.swift */,
 			);
 			path = Stations;
 			sourceTree = "<group>";
@@ -144,9 +146,9 @@
 		52EA917627CA408600FF632C = {
 			isa = PBXGroup;
 			children = (
+				5245C18727CC3B4A006B592B /* StationsViewModelTests.swift */,
 				52EA918127CA408600FF632C /* irish-rail */,
 				52EA919827CA408800FF632C /* irish-railTests */,
-				52EA91A227CA408800FF632C /* irish-railUITests */,
 				52EA918027CA408600FF632C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -177,18 +179,8 @@
 		52EA919827CA408800FF632C /* irish-railTests */ = {
 			isa = PBXGroup;
 			children = (
-				52EA919927CA408800FF632C /* irish_railTests.swift */,
 			);
 			path = "irish-railTests";
-			sourceTree = "<group>";
-		};
-		52EA91A227CA408800FF632C /* irish-railUITests */ = {
-			isa = PBXGroup;
-			children = (
-				52EA91A327CA408800FF632C /* irish_railUITests.swift */,
-				52EA91A527CA408800FF632C /* irish_railUITestsLaunchTests.swift */,
-			);
-			path = "irish-railUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +256,7 @@
 					};
 					52EA919427CA408800FF632C = {
 						CreatedOnToolsVersion = 13.2.1;
+						LastSwiftMigration = 1320;
 						TestTargetID = 52EA917E27CA408600FF632C;
 					};
 					52EA919E27CA408800FF632C = {
@@ -327,9 +320,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				52CA031827CAB85E006F93FF /* Coordinator.swift in Sources */,
+				5245C18627CC3AC2006B592B /* StationsViewModel.swift in Sources */,
 				521FDF8C27CBED8F00BAC602 /* StationsCoordinator.swift in Sources */,
 				52EA918727CA408600FF632C /* StationsViewController.swift in Sources */,
 				52CA031C27CABAC0006F93FF /* AppCoordinator.swift in Sources */,
+				5245C18427CC35E3006B592B /* StationType.swift in Sources */,
 				52EA91B527CA50CE00FF632C /* BaseAPI.swift in Sources */,
 				52EA918327CA408600FF632C /* AppDelegate.swift in Sources */,
 				52CA031A27CAB89F006F93FF /* UIViewController+Extensions.swift in Sources */,
@@ -344,7 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52EA919A27CA408800FF632C /* irish_railTests.swift in Sources */,
+				5245C18827CC3B4A006B592B /* StationsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,8 +347,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52EA91A627CA408800FF632C /* irish_railUITestsLaunchTests.swift in Sources */,
-				52EA91A427CA408800FF632C /* irish_railUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,15 +560,22 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M7WGV6L4K2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "diniz.bruno.irish-railTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/irish-rail.app/irish-rail";
@@ -587,11 +587,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M7WGV6L4K2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "diniz.bruno.irish-railTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -15,10 +15,16 @@ class StationsCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
+    // MARK: - Coordinator
+    
     func start() {
         let viewController = StationsViewController.initFromStoryboard(named: "Stations")
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: false)
+    }
+    
+    func stationDetails(station: Station) {
+        
     }
     
 }
