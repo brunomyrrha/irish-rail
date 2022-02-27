@@ -11,7 +11,7 @@
 		5242EC7B27CC111800DC980A /* StationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5242EC7A27CC111800DC980A /* StationsAPI.swift */; };
 		5245C18427CC35E3006B592B /* StationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245C18327CC35E3006B592B /* StationType.swift */; };
 		5245C18627CC3AC2006B592B /* StationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245C18527CC3AC2006B592B /* StationsViewModel.swift */; };
-		5245C18827CC3B4A006B592B /* StationsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245C18727CC3B4A006B592B /* StationsViewModelTests.swift */; };
+		5245C19027CC403C006B592B /* irish_railTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245C18F27CC403C006B592B /* irish_railTests.swift */; };
 		52CA031827CAB85E006F93FF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CA031727CAB85E006F93FF /* Coordinator.swift */; };
 		52CA031A27CAB89F006F93FF /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CA031927CAB89F006F93FF /* UIViewController+Extensions.swift */; };
 		52CA031C27CABAC0006F93FF /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CA031B27CABAC0006F93FF /* AppCoordinator.swift */; };
@@ -27,14 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		52EA919627CA408800FF632C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 52EA917727CA408600FF632C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52EA917E27CA408600FF632C;
-			remoteInfo = "irish-rail";
-		};
-		52EA91A027CA408800FF632C /* PBXContainerItemProxy */ = {
+		5245C19127CC403C006B592B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 52EA917727CA408600FF632C /* Project object */;
 			proxyType = 1;
@@ -48,7 +41,8 @@
 		5242EC7A27CC111800DC980A /* StationsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsAPI.swift; sourceTree = "<group>"; };
 		5245C18327CC35E3006B592B /* StationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationType.swift; sourceTree = "<group>"; };
 		5245C18527CC3AC2006B592B /* StationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsViewModel.swift; sourceTree = "<group>"; };
-		5245C18727CC3B4A006B592B /* StationsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StationsViewModelTests.swift; path = "irish-railTests/StationsViewModelTests.swift"; sourceTree = "<group>"; };
+		5245C18D27CC403C006B592B /* irish-railTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "irish-railTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5245C18F27CC403C006B592B /* irish_railTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = irish_railTests.swift; sourceTree = "<group>"; };
 		52CA031727CAB85E006F93FF /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		52CA031927CAB89F006F93FF /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		52CA031B27CABAC0006F93FF /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -60,29 +54,20 @@
 		52EA918B27CA408800FF632C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52EA918E27CA408800FF632C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52EA919027CA408800FF632C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		52EA919527CA408800FF632C /* irish-railTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "irish-railTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		52EA919F27CA408800FF632C /* irish-railUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "irish-railUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52EA91B227CA4F2A00FF632C /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		52EA91B427CA50CE00FF632C /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		52EA91B627CA922300FF632C /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5245C18A27CC403C006B592B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52EA917C27CA408600FF632C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52EA919227CA408800FF632C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52EA919C27CA408800FF632C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -143,12 +128,19 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		5245C18E27CC403C006B592B /* irish-railTests */ = {
+			isa = PBXGroup;
+			children = (
+				5245C18F27CC403C006B592B /* irish_railTests.swift */,
+			);
+			path = "irish-railTests";
+			sourceTree = "<group>";
+		};
 		52EA917627CA408600FF632C = {
 			isa = PBXGroup;
 			children = (
-				5245C18727CC3B4A006B592B /* StationsViewModelTests.swift */,
 				52EA918127CA408600FF632C /* irish-rail */,
-				52EA919827CA408800FF632C /* irish-railTests */,
+				5245C18E27CC403C006B592B /* irish-railTests */,
 				52EA918027CA408600FF632C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -157,8 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				52EA917F27CA408600FF632C /* irish-rail.app */,
-				52EA919527CA408800FF632C /* irish-railTests.xctest */,
-				52EA919F27CA408800FF632C /* irish-railUITests.xctest */,
+				5245C18D27CC403C006B592B /* irish-railTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -176,16 +167,27 @@
 			path = "irish-rail";
 			sourceTree = "<group>";
 		};
-		52EA919827CA408800FF632C /* irish-railTests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "irish-railTests";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5245C18C27CC403C006B592B /* irish-railTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5245C19327CC403C006B592B /* Build configuration list for PBXNativeTarget "irish-railTests" */;
+			buildPhases = (
+				5245C18927CC403C006B592B /* Sources */,
+				5245C18A27CC403C006B592B /* Frameworks */,
+				5245C18B27CC403C006B592B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5245C19227CC403C006B592B /* PBXTargetDependency */,
+			);
+			name = "irish-railTests";
+			productName = "irish-railTests";
+			productReference = 5245C18D27CC403C006B592B /* irish-railTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		52EA917E27CA408600FF632C /* irish-rail */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52EA91A927CA408800FF632C /* Build configuration list for PBXNativeTarget "irish-rail" */;
@@ -205,42 +207,6 @@
 			productReference = 52EA917F27CA408600FF632C /* irish-rail.app */;
 			productType = "com.apple.product-type.application";
 		};
-		52EA919427CA408800FF632C /* irish-railTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52EA91AC27CA408800FF632C /* Build configuration list for PBXNativeTarget "irish-railTests" */;
-			buildPhases = (
-				52EA919127CA408800FF632C /* Sources */,
-				52EA919227CA408800FF632C /* Frameworks */,
-				52EA919327CA408800FF632C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				52EA919727CA408800FF632C /* PBXTargetDependency */,
-			);
-			name = "irish-railTests";
-			productName = "irish-railTests";
-			productReference = 52EA919527CA408800FF632C /* irish-railTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		52EA919E27CA408800FF632C /* irish-railUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52EA91AF27CA408800FF632C /* Build configuration list for PBXNativeTarget "irish-railUITests" */;
-			buildPhases = (
-				52EA919B27CA408800FF632C /* Sources */,
-				52EA919C27CA408800FF632C /* Frameworks */,
-				52EA919D27CA408800FF632C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				52EA91A127CA408800FF632C /* PBXTargetDependency */,
-			);
-			name = "irish-railUITests";
-			productName = "irish-railUITests";
-			productReference = 52EA919F27CA408800FF632C /* irish-railUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -251,17 +217,12 @@
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
+					5245C18C27CC403C006B592B = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 52EA917E27CA408600FF632C;
+					};
 					52EA917E27CA408600FF632C = {
 						CreatedOnToolsVersion = 13.2.1;
-					};
-					52EA919427CA408800FF632C = {
-						CreatedOnToolsVersion = 13.2.1;
-						LastSwiftMigration = 1320;
-						TestTargetID = 52EA917E27CA408600FF632C;
-					};
-					52EA919E27CA408800FF632C = {
-						CreatedOnToolsVersion = 13.2.1;
-						TestTargetID = 52EA917E27CA408600FF632C;
 					};
 				};
 			};
@@ -281,13 +242,19 @@
 			projectRoot = "";
 			targets = (
 				52EA917E27CA408600FF632C /* irish-rail */,
-				52EA919427CA408800FF632C /* irish-railTests */,
-				52EA919E27CA408800FF632C /* irish-railUITests */,
+				5245C18C27CC403C006B592B /* irish-railTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5245C18B27CC403C006B592B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52EA917D27CA408600FF632C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -298,23 +265,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		52EA919327CA408800FF632C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52EA919D27CA408800FF632C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5245C18927CC403C006B592B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5245C19027CC403C006B592B /* irish_railTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52EA917B27CA408600FF632C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -335,33 +296,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		52EA919127CA408800FF632C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5245C18827CC3B4A006B592B /* StationsViewModelTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52EA919B27CA408800FF632C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		52EA919727CA408800FF632C /* PBXTargetDependency */ = {
+		5245C19227CC403C006B592B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 52EA917E27CA408600FF632C /* irish-rail */;
-			targetProxy = 52EA919627CA408800FF632C /* PBXContainerItemProxy */;
-		};
-		52EA91A127CA408800FF632C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 52EA917E27CA408600FF632C /* irish-rail */;
-			targetProxy = 52EA91A027CA408800FF632C /* PBXContainerItemProxy */;
+			targetProxy = 5245C19127CC403C006B592B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -385,6 +326,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5245C19427CC403C006B592B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7WGV6L4K2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "diniz.bruno.irish-railTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/irish-rail.app/irish-rail";
+			};
+			name = Debug;
+		};
+		5245C19527CC403C006B592B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7WGV6L4K2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "diniz.bruno.irish-railTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/irish-rail.app/irish-rail";
+			};
+			name = Release;
+		};
 		52EA91A727CA408800FF632C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -555,98 +532,18 @@
 			};
 			name = Release;
 		};
-		52EA91AD27CA408800FF632C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M7WGV6L4K2;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "diniz.bruno.irish-railTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/irish-rail.app/irish-rail";
-			};
-			name = Debug;
-		};
-		52EA91AE27CA408800FF632C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M7WGV6L4K2;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "diniz.bruno.irish-railTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/irish-rail.app/irish-rail";
-			};
-			name = Release;
-		};
-		52EA91B027CA408800FF632C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M7WGV6L4K2;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "diniz.bruno.irish-railUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "irish-rail";
-			};
-			name = Debug;
-		};
-		52EA91B127CA408800FF632C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M7WGV6L4K2;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "diniz.bruno.irish-railUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "irish-rail";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5245C19327CC403C006B592B /* Build configuration list for PBXNativeTarget "irish-railTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5245C19427CC403C006B592B /* Debug */,
+				5245C19527CC403C006B592B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		52EA917A27CA408600FF632C /* Build configuration list for PBXProject "irish-rail" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -661,24 +558,6 @@
 			buildConfigurations = (
 				52EA91AA27CA408800FF632C /* Debug */,
 				52EA91AB27CA408800FF632C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		52EA91AC27CA408800FF632C /* Build configuration list for PBXNativeTarget "irish-railTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52EA91AD27CA408800FF632C /* Debug */,
-				52EA91AE27CA408800FF632C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		52EA91AF27CA408800FF632C /* Build configuration list for PBXNativeTarget "irish-railUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52EA91B027CA408800FF632C /* Debug */,
-				52EA91B127CA408800FF632C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

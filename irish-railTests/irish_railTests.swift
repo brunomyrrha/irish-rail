@@ -1,36 +1,80 @@
 //
-//  irish_railTests.swift
+//  StationsViewModelTests.swift
 //  irish-railTests
 //
-//  Created by Bruno Diniz on 26/02/2022.
+//  Created by Bruno Diniz on 27/02/2022.
 //
 
 import XCTest
 @testable import irish_rail
 
-class irish_railTests: XCTestCase {
+class StationsViewModelTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var viewModel: StationsViewModel!
+    fileprivate var api: StationsAPISpy!
+    
+    // MARK: - Lifecycle
+    
+    override func setUp() {
+        super.setUp()
+        
+        api = StationsAPISpy()
+        viewModel = StationsViewModel(api: api)
+    }
+    
+    override func tearDown() {
+        
+        viewModel = nil
+        api = nil
+        super.tearDown()
+    }
+    
+    // MARK: - Test cases
+    
+    func testFetchStationsSucceed() async {
+        await viewModel.fetchStations()
+        XCTAssertEqual(viewModel.stations, [api.mockedStation])
+        await viewModel.fetchStations(id: 1)
+        XCTAssertEqual(viewModel.stations, [api.mockedStation])
+    }
+    
+    func testFetchStationsFail() async {
+        api.shouldFail = true
+        await viewModel.fetchStations()
+        XCTAssertEqual(viewModel.stations, [])
+        await viewModel.fetchStations(id: 1)
+        XCTAssertEqual(viewModel.stations, [])
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+}
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+private class StationsAPISpy: StationsAPI {
+    
+    enum SPYError: Error {
+        case failed
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    var shouldFail = false
+    var stations = [Station]()
+    
+    var mockedStation: Station {
+        let data = ["StationId": "1", "StationDesc": "description"]
+        let station = Station(from: data)
+        return station!
     }
-
+    
+    init() {
+        stations.append(mockedStation)
+    }
+    
+    // MARK: - Public methods
+    
+    func fetchStations() async -> Result<[Station], Error> {
+        shouldFail ? .failure(SPYError.failed) : .success(stations)
+    }
+    
+    func fetchStations(type: StationType) async -> Result<[Station], Error> {
+        shouldFail ? .failure(SPYError.failed) : .success(stations)
+    }
+    
 }
