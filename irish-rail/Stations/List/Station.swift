@@ -34,7 +34,9 @@ struct Station: Equatable {
         self.id = id
         self.description = description
         code = dictionary[Keys.code] as? String
-        alias = dictionary[Keys.alias] as? String
+        if let aliasString = dictionary[Keys.alias] as? String {
+            alias = aliasString
+        }
         if let latitudeString = dictionary[Keys.latitude] as? String {
             latitude = Double(latitudeString)
         }

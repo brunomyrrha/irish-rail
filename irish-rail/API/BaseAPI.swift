@@ -17,6 +17,8 @@ class BaseAPI<T>: NSObject, XMLParserDelegate {
     private var keyBuffer: String = .empty
     private var valueBuffer: String = .empty
     private var tempData = [String: Any]()
+    private let scheme = "http"
+    private let host = "api.irishrail.ie"
     
     override init() { }
     
@@ -43,6 +45,15 @@ class BaseAPI<T>: NSObject, XMLParserDelegate {
     
     func isEndingObjectKey(name: String) -> Bool {
         fatalError("Call from BaseAPI not allowed")
+    }
+        
+    func makeURL(path: String, queryItems: [URLQueryItem] = []) -> URL {
+        var components = URLComponents()
+        components.scheme = scheme
+        components.host = host
+        components.path = path
+        components.queryItems = queryItems
+        return components.url!
     }
     
     // MARK: - XMLParserDelegate

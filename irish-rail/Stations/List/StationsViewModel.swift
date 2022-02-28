@@ -21,9 +21,10 @@ class StationsViewModel: ObservableObject {
         static var nameNotFound: String { "Station name not found" }
     }
     
-    @Published var stations = [Station]()
-    @Published var route = PassthroughSubject<StationRoute, Never>()
+    @Published private(set) var stations = [Station]()
+    @Published private(set) var route = PassthroughSubject<StationRoute, Never>()
     
+    private var fetchedStations = [Station]()
     private let api: StationsAPI
     
     init(api: StationsAPI = StationsAPIBase.shared) {
@@ -35,17 +36,19 @@ class StationsViewModel: ObservableObject {
     func fetchStations(id: Int) async {
         let result = await api.fetchStations(type: .init(rawValue: id) ?? .all)
         switch result {
-        case .success(let values): stations = values.sorted(by: { $0.description < $1.description })
+        case .success(let values): fetchedStations = values.sorted(by: { $0.description < $1.description })
         case .failure(let error): routeAlert(error: error)
         }
+        stations = fetchedStations
     }
     
     func fetchStations() async {
         let result = await api.fetchStations()
         switch result {
-        case .success(let values): stations = values.sorted(by: { $0.description < $1.description })
+        case .success(let values): fetchedStations = values.sorted(by: { $0.description < $1.description })
         case .failure(let error): routeAlert(error: error)
         }
+        stations = fetchedStations
     }
     
     func getStationName(at index: Int) -> String {
@@ -58,6 +61,20 @@ class StationsViewModel: ObservableObject {
     
     func didSelectStation(at index: Int) {
         route.send(.stationDetails(station: stations[index]))
+    }
+    
+    func search(value text: String?) {
+        guard let text = text, !text.isEmpty else {
+            clearSearch()
+            return
+        }
+        stations = fetchedStations.filter { station in
+            station.description.lowercased().contains(text.lowercased())
+        }
+    }
+    
+    func clearSearch() {
+        stations = fetchedStations
     }
     
     // MARK: - Private methods

@@ -18,9 +18,13 @@ class StationsCoordinator: Coordinator {
     // MARK: - Coordinator
     
     func start() {
-        let viewController = StationsViewController.initFromStoryboard(named: "Stations")
+        let viewController = StationsViewController.initFromStoryboard(named: "StationsView")
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: false)
+    }
+    
+    func dismiss() {
+        navigationController.popViewController(animated: true)
     }
     
     func makeAlert(_ alert: AlertModel) {
@@ -30,7 +34,9 @@ class StationsCoordinator: Coordinator {
     }
     
     func makeStationDetails(_ station: Station) {
-        print("Did tap", station.description)
+        let viewController = StationDetailsViewController.initFromStoryboard(named: "StationDetails")
+        viewController.setUp(with: station)
+        navigationController.pushViewController(viewController, animated: true)
     }
     
 }

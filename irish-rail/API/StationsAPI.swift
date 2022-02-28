@@ -19,17 +19,16 @@ class StationsAPIBase: BaseAPI<Station>, StationsAPI {
     
     private enum Constants {
     
-        static let scheme = "http"
-        static let host = "api.irishrail.ie"
         static let allStationsPath = "/realtime/realtime.asmx/getAllStationsXML"
         static let allStationsWithTypeURL = "/realtime/realtime.asmx/getAllStationsXML_WithStationType"
         static let objectKey = "objStation"
         
     }
     
-    // MARK: - Shared
+    // MARK: - Shared instance
     
     static let shared = StationsAPIBase()
+    
     private override init() {
         super.init()
     }
@@ -38,13 +37,13 @@ class StationsAPIBase: BaseAPI<Station>, StationsAPI {
     
     func fetchStations() async -> Result<[Station], Error> {
         let url = makeURL(path: Constants.allStationsPath)
-        return await super.makeRequest(url: url)
+        return await makeRequest(url: url)
     }
     
     func fetchStations(type: StationType) async -> Result<[Station], Error> {
         let queryItem = URLQueryItem(name: type.key, value: type.value)
         let url = makeURL(path: Constants.allStationsWithTypeURL, queryItems: [queryItem])
-        return await super.makeRequest(url: url)
+        return await makeRequest(url: url)
     }
     
     // MARK: - BaseAPI methods
@@ -56,17 +55,6 @@ class StationsAPIBase: BaseAPI<Station>, StationsAPI {
     
     override func isEndingObjectKey(name: String) -> Bool {
         name == Constants.objectKey
-    }
-    
-    // MARK: - Private methods
-    
-    private func makeURL(path: String, queryItems: [URLQueryItem] = []) -> URL {
-        var components = URLComponents()
-        components.scheme = Constants.scheme
-        components.host = Constants.host
-        components.path = path
-        components.queryItems = queryItems
-        return components.url!
     }
     
 }

@@ -12,7 +12,8 @@ class StationsViewController: UIViewController {
     
     @IBOutlet private weak var stationTypeSegmentControl: UISegmentedControl!
     @IBOutlet private weak var tableView: UITableView!
-
+    @IBOutlet private weak var searchBar: UISearchBar!
+    
     private let viewModel = StationsViewModel()
     private var storage = Set<AnyCancellable>()
     private let refreshControl = UIRefreshControl()
@@ -21,27 +22,28 @@ class StationsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.refreshControl = refreshControl
-        refreshControl.tintColor = .tintColor
-        refreshControl.addTarget(self, action: #selector(refreshControlAction), for: .valueChanged)
+        setUp()
         observe()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
         fetchStations()
     }
     
     // MARK: - IBActions
-        
+    
     @IBAction func didChangeStationType(_ sender: UISegmentedControl) {
         fetchStations(id: sender.selectedSegmentIndex)
     }
     
     // MARK: - Private methods
+    
+    private func setUp() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        searchBar.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.refreshControl = refreshControl
+        refreshControl.tintColor = .tintColor
+        refreshControl.addTarget(self, action: #selector(refreshControlAction), for: .valueChanged)
+    }
     
     private func fetchStations(id: Int? = nil) {
         Task.detached { [unowned self] in
@@ -75,6 +77,7 @@ class StationsViewController: UIViewController {
         defer { refreshControl.endRefreshing() }
         let index = stationTypeSegmentControl.selectedSegmentIndex
         fetchStations(id: index)
+        searchBar.text?.removeAll()
     }
     
     // MARK: - Observe
@@ -101,7 +104,7 @@ class StationsViewController: UIViewController {
                 case .alert(let alert): self?.coordinator?.makeAlert(alert)
                 case .stationDetails(station: let station): self?.coordinator?.makeStationDetails(station)
                 }
-        }
+            }
             .store(in: &storage)
     }
     
@@ -110,12 +113,11 @@ class StationsViewController: UIViewController {
 // MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension StationsViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.stations.count
     }
     
-   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell")!
         cell.textLabel?.text = viewModel.getStationName(at: indexPath.row)
@@ -124,6 +126,24 @@ extension StationsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectStation(at: indexPath.row)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
+    }
+    
+}
+
+// MARK: - UISearchBarDelegate
+
+extension StationsViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.search(value: searchText)
     }
     
 }
