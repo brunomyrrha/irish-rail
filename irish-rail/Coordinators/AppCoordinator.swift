@@ -10,11 +10,13 @@ import UIKit
 class AppCoordinator: Coordinator {
     
     let navigationController: UINavigationController
+    var childCoordinators: [Coordinator]
     
     // MARK: - Lifecycle
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        childCoordinators = []
     }
     
     // MARK: - Coordinator methods
@@ -23,16 +25,12 @@ class AppCoordinator: Coordinator {
         makeAppCoordinator()
     }
     
-    func showDetails() {
-        
-    }
-    
     // MARK: - Private methods
     
     private func makeAppCoordinator() {
         let coordinator = StationsCoordinator(navigationController: navigationController)
+        childCoordinators.append(coordinator)
         coordinator.start()
     }
-    
     
 }

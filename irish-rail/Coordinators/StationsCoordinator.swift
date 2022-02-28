@@ -23,8 +23,14 @@ class StationsCoordinator: Coordinator {
         navigationController.pushViewController(viewController, animated: false)
     }
     
-    func stationDetails(station: Station) {
-        
+    func makeAlert(_ alert: AlertModel) {
+        let alert = UIAlertController(title: alert.title, message: alert.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        navigationController.present(alert, animated: true, completion: nil)
+    }
+    
+    func makeStationDetails(_ station: Station) {
+        print("Did tap", station.description)
     }
     
 }

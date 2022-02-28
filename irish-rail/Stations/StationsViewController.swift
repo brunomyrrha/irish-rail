@@ -15,6 +15,7 @@ class StationsViewController: UIViewController {
 
     private let viewModel = StationsViewModel()
     private var storage = Set<AnyCancellable>()
+    private let refreshControl = UIRefreshControl()
     weak var coordinator: StationsCoordinator?
     
     override func viewDidLoad() {
@@ -22,10 +23,18 @@ class StationsViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        fetchStations()
-        observeStations()
+        tableView.refreshControl = refreshControl
+        refreshControl.tintColor = .tintColor
+        refreshControl.addTarget(self, action: #selector(refreshControlAction), for: .valueChanged)
+        observe()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        fetchStations()
+    }
+    
     // MARK: - IBActions
         
     @IBAction func didChangeStationType(_ sender: UISegmentedControl) {
@@ -35,7 +44,6 @@ class StationsViewController: UIViewController {
     // MARK: - Private methods
     
     private func fetchStations(id: Int? = nil) {
-        
         Task.detached { [unowned self] in
             await self.startLoadAnimation()
             if let id = id {
@@ -48,7 +56,7 @@ class StationsViewController: UIViewController {
     
     private func startLoadAnimation() {
         stationTypeSegmentControl.isEnabled = false
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.25) {
             self.tableView.alpha = 0
         }
     }
@@ -56,19 +64,44 @@ class StationsViewController: UIViewController {
     private func endLoadAnimation() {
         DispatchQueue.main.async {
             self.stationTypeSegmentControl.isEnabled = true
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.25) {
                 self.tableView.alpha = 1
                 self.tableView.reloadData()
             }
         }
     }
     
+    @objc private func refreshControlAction() {
+        defer { refreshControl.endRefreshing() }
+        let index = stationTypeSegmentControl.selectedSegmentIndex
+        fetchStations(id: index)
+    }
+    
     // MARK: - Observe
+    
+    private func observe() {
+        observeStations()
+        observeRoute()
+    }
     
     private func observeStations() {
         startLoadAnimation()
         viewModel.$stations
+            .receive(on: RunLoop.main)
             .sink { [weak self] _ in self?.endLoadAnimation() }
+            .store(in: &storage)
+    }
+    
+    private func observeRoute() {
+        viewModel.route
+            .receive(on: RunLoop.main)
+            .sink { [weak self] in
+                switch $0 {
+                case .initial: break
+                case .alert(let alert): self?.coordinator?.makeAlert(alert)
+                case .stationDetails(station: let station): self?.coordinator?.makeStationDetails(station)
+                }
+        }
             .store(in: &storage)
     }
     
@@ -85,12 +118,12 @@ extension StationsViewController: UITableViewDelegate, UITableViewDataSource {
    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell")!
-        cell.textLabel?.text = viewModel.stations[indexPath.row].description.capitalized
+        cell.textLabel?.text = viewModel.getStationName(at: indexPath.row)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coordinator?.stationDetails(station: viewModel.stations[indexPath.row])
+        viewModel.didSelectStation(at: indexPath.row)
     }
     
 }
