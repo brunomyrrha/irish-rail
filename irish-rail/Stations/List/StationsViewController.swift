@@ -15,7 +15,7 @@ class StationsViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     
     private let viewModel = StationsViewModel()
-    private var storage = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
     private let refreshControl = UIRefreshControl()
     weak var coordinator: StationsCoordinator?
     
@@ -64,12 +64,10 @@ class StationsViewController: UIViewController {
     }
     
     private func endLoadAnimation() {
-        DispatchQueue.main.async {
+        UIView.animate(withDuration: 0.25) {
+            self.tableView.reloadData()
+            self.tableView.alpha = 1
             self.stationTypeSegmentControl.isEnabled = true
-            UIView.animate(withDuration: 0.25) {
-                self.tableView.alpha = 1
-                self.tableView.reloadData()
-            }
         }
     }
     
@@ -92,7 +90,7 @@ class StationsViewController: UIViewController {
         viewModel.$stations
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in self?.endLoadAnimation() }
-            .store(in: &storage)
+            .store(in: &cancellables)
     }
     
     private func observeRoute() {
@@ -105,7 +103,7 @@ class StationsViewController: UIViewController {
                 case .stationDetails(station: let station): self?.coordinator?.makeStationDetails(station)
                 }
             }
-            .store(in: &storage)
+            .store(in: &cancellables)
     }
     
 }
@@ -120,12 +118,16 @@ extension StationsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell")!
-        cell.textLabel?.text = viewModel.getStationName(at: indexPath.row)
+        var content = cell.defaultContentConfiguration()
+        content.text = viewModel.getStationName(at: indexPath.row)
+        content.secondaryText = viewModel.getStationCode(at: indexPath.row)
+        cell.contentConfiguration = content
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectStation(at: indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

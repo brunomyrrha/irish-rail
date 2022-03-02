@@ -35,7 +35,7 @@ class StationsCoordinator: Coordinator {
     
     func makeStationDetails(_ station: Station) {
         let viewController = StationDetailsViewController.initFromStoryboard(named: "StationDetails")
-        viewController.setUp(with: station)
+        viewController.inject(model: station)
         navigationController.pushViewController(viewController, animated: true)
     }
     

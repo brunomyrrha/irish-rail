@@ -8,6 +8,7 @@
 import Foundation
 
 enum StationType: Int {
+    
     case all
     case mainline
     case suburban

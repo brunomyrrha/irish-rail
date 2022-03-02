@@ -18,7 +18,7 @@ class StationsViewModel: ObservableObject {
     
     private enum StationViewModelError: Error {
         static var defaultErrorMessage: String { "Something is wrong. Try again later." }
-        static var nameNotFound: String { "Station name not found" }
+        static var infoNotFound: String { "Station info not found" }
     }
     
     @Published private(set) var stations = [Station]()
@@ -54,9 +54,17 @@ class StationsViewModel: ObservableObject {
     func getStationName(at index: Int) -> String {
         guard index < stations.count else {
             routeAlert()
-            return StationViewModelError.nameNotFound
+            return StationViewModelError.infoNotFound
         }
         return stations[index].description.capitalized
+    }
+    
+    func getStationCode(at index: Int) -> String {
+        guard index < stations.count, let code = stations[index].code?.uppercased() else {
+            routeAlert()
+            return StationViewModelError.infoNotFound
+        }
+        return code
     }
     
     func didSelectStation(at index: Int) {
@@ -80,6 +88,7 @@ class StationsViewModel: ObservableObject {
     // MARK: - Private methods
     
     private func routeAlert(error: Error? = nil) {
+        stations.removeAll()
         let message = error?.localizedDescription ?? StationViewModelError.defaultErrorMessage
         let alert = AlertModel(message: message)
         route.send(.alert(alert: alert))

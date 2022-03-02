@@ -94,6 +94,7 @@ class BaseAPI<T>: NSObject, XMLParserDelegate {
     }
     
     private func endParsingElement() {
+        guard !keyBuffer.isEmpty else { return }
         tempData[keyBuffer] = valueBuffer
         keyBuffer = .empty
         valueBuffer = .empty
