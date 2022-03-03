@@ -25,7 +25,6 @@
 		526F42E627D0195F00C1EF08 /* FavoritesView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 526F42E527D0195F00C1EF08 /* FavoritesView.storyboard */; };
 		526F42E827D0199300C1EF08 /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F42E727D0199300C1EF08 /* FavoritesCoordinator.swift */; };
 		526F42EA27D0330200C1EF08 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F42E927D0330200C1EF08 /* FavoritesViewModel.swift */; };
-		526F42F127D0407400C1EF08 /* TrainsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F42F027D0407400C1EF08 /* TrainsViewModel.swift */; };
 		52CA031827CAB85E006F93FF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CA031727CAB85E006F93FF /* Coordinator.swift */; };
 		52CA031A27CAB89F006F93FF /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CA031927CAB89F006F93FF /* UIViewController+Extensions.swift */; };
 		52CA031C27CABAC0006F93FF /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CA031B27CABAC0006F93FF /* AppCoordinator.swift */; };
@@ -70,7 +69,6 @@
 		526F42E527D0195F00C1EF08 /* FavoritesView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FavoritesView.storyboard; sourceTree = "<group>"; };
 		526F42E727D0199300C1EF08 /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
 		526F42E927D0330200C1EF08 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
-		526F42F027D0407400C1EF08 /* TrainsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainsViewModel.swift; sourceTree = "<group>"; };
 		52CA031727CAB85E006F93FF /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		52CA031927CAB89F006F93FF /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		52CA031B27CABAC0006F93FF /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -201,7 +199,6 @@
 		526F42EB27D0333D00C1EF08 /* Trains */ = {
 			isa = PBXGroup;
 			children = (
-				526F42F027D0407400C1EF08 /* TrainsViewModel.swift */,
 				522C245E27D0C3050080C436 /* TrainsView.swift */,
 			);
 			path = Trains;
@@ -366,7 +363,6 @@
 				52CA031C27CABAC0006F93FF /* AppCoordinator.swift in Sources */,
 				5245C18427CC35E3006B592B /* StationType.swift in Sources */,
 				52EA91B527CA50CE00FF632C /* BaseAPI.swift in Sources */,
-				526F42F127D0407400C1EF08 /* TrainsViewModel.swift in Sources */,
 				526F42DB27D0093500C1EF08 /* StorageManager.swift in Sources */,
 				522CCEA927CD7C790059CE5B /* StationDataAPI.swift in Sources */,
 				52EA918327CA408600FF632C /* AppDelegate.swift in Sources */,

@@ -40,6 +40,7 @@ struct StationData: Equatable, Codable {
     var trainCode: String
     var dueIn: String
     var destination: String
+    var direction: String
     var serverTime: String?
     var queryTime: String?
     var trainDate: String?
@@ -53,7 +54,6 @@ struct StationData: Equatable, Codable {
     var expDeparture: String?
     var schArrival: String?
     var schDeparture: String?
-    var direction: String?
     var trainType: String?
     var locationType: String?
     
@@ -62,12 +62,14 @@ struct StationData: Equatable, Codable {
               let code = dictionary[Keys.stationCode] as? String,
               let trainCode = dictionary[Keys.trainCode] as? String,
               let dueIn = dictionary[Keys.dueIn] as? String,
-              let destination = dictionary[Keys.destination] as? String else { return nil }
+              let destination = dictionary[Keys.destination] as? String,
+              let direction = dictionary[Keys.direction] as? String else { return nil }
         self.fullName = fullName
         self.code = code
         self.trainCode = trainCode
         self.dueIn = dueIn
         self.destination = destination
+        self.direction = direction
         serverTime = dictionary[Keys.serverTime] as? String
         queryTime = dictionary[Keys.queryTime] as? String
         trainDate = dictionary[Keys.trainDate] as? String
@@ -80,7 +82,6 @@ struct StationData: Equatable, Codable {
         expDeparture = dictionary[Keys.expDepart] as? String
         schArrival = dictionary[Keys.schArrival] as? String
         schDeparture = dictionary[Keys.schDepart] as? String
-        direction = dictionary[Keys.direction] as? String
         trainType = dictionary[Keys.trainType] as? String
         locationType = dictionary[Keys.locationType] as? String
     }
