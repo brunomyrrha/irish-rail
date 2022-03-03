@@ -17,10 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YOp-so-rVG">
-                                <rect key="frame" x="197" y="438" width="20" height="20"/>
-                                <color key="color" name="AccentColor"/>
-                            </activityIndicatorView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Yy4-fj-bzK">
+                                <rect key="frame" x="0.0" y="88" width="414" height="32"/>
+                                <segments>
+                                    <segment title="All"/>
+                                    <segment title="Mainline"/>
+                                    <segment title="Suburban"/>
+                                    <segment title="Dart"/>
+                                </segments>
+                                <connections>
+                                    <action selector="didChangeStationType:" destination="BYZ-38-t0r" eventType="valueChanged" id="xcj-CU-HEG"/>
+                                </connections>
+                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="doZ-JV-SdM">
                                 <rect key="frame" x="0.0" y="119" width="414" height="743"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -49,18 +57,10 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Yy4-fj-bzK">
-                                <rect key="frame" x="0.0" y="88" width="414" height="32"/>
-                                <segments>
-                                    <segment title="All"/>
-                                    <segment title="Mainline"/>
-                                    <segment title="Suburban"/>
-                                    <segment title="Dart"/>
-                                </segments>
-                                <connections>
-                                    <action selector="didChangeStationType:" destination="BYZ-38-t0r" eventType="valueChanged" id="xcj-CU-HEG"/>
-                                </connections>
-                            </segmentedControl>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YOp-so-rVG">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                <color key="color" name="AccentColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -82,6 +82,7 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="YOp-so-rVG" id="mU1-4b-DKN"/>
                         <outlet property="searchBar" destination="z9f-C6-fXm" id="xnk-EM-cVa"/>
                         <outlet property="stationTypeSegmentControl" destination="Yy4-fj-bzK" id="Dvx-qZ-p8a"/>
                         <outlet property="tableView" destination="doZ-JV-SdM" id="zmg-4u-Xh3"/>

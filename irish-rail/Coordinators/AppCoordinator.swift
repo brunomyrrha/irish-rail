@@ -7,8 +7,9 @@
 
 import UIKit
 
-class AppCoordinator {
+class AppCoordinator: Coordinator {
     
+    let navigationController: UINavigationController
     private let stationNavigationController: UINavigationController
     private let favoriteNavigationController: UINavigationController
     private let tabBarController: UITabBarController
@@ -18,6 +19,7 @@ class AppCoordinator {
     
     init(tabBarController: UITabBarController) {
         self.tabBarController = tabBarController
+        navigationController = UINavigationController()
         stationNavigationController = UINavigationController()
         favoriteNavigationController = UINavigationController()
         childCoordinators = []
@@ -36,7 +38,7 @@ class AppCoordinator {
     private func configureTabBarController() {
         let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithDefaultBackground()
-        tabBarAppearance.backgroundColor = UIColor.white
+        tabBarAppearance.backgroundColor = UIColor.systemBackground
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         tabBarController.viewControllers = [stationNavigationController, favoriteNavigationController]
@@ -58,4 +60,19 @@ class AppCoordinator {
         coordinator.start()
     }
     
+    func presentTrainsView(_ trains: StationData) {
+        fatalError(errorMessage)
+    }
+    
+    func presentStationsDataView(_ station: Station) {
+        fatalError(errorMessage)
+    }
+    
+    func presentStationsView() {
+        fatalError(errorMessage)
+    }
+    
+    func presentFavoritesView() {
+        fatalError(errorMessage)
+    }
 }

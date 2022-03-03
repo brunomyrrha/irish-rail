@@ -7,12 +7,13 @@
 
 import Foundation
 import Combine
+import CoreData
 
 class StationsViewModel: ObservableObject {
     
-    enum Route {
+    enum StationsViewRoute {
         case alert(AlertModel)
-        case stationData(Station)
+        case station(Station)
     }
     
     private enum StationViewModelError: Error {
@@ -21,28 +22,28 @@ class StationsViewModel: ObservableObject {
     }
     
     @Published private(set) var stations = [Station]()
-    private(set) var route = PassthroughSubject<Route, Never>()
+    private(set) var route = PassthroughSubject<StationsViewRoute, Never>()
     
     private var fetchedStations = [Station]()
     private let api: StationsAPI
+    private let storageManager: StorageManager
     
-    init(api: StationsAPI = StationsAPIBase.shared) {
+    init(api: StationsAPI = StationsAPIBase.shared, storageManager: StorageManager = StorageManagerBase.shared) {
         self.api = api
+        self.storageManager = storageManager
     }
     
     // MARK: - Public methods
     
-    func fetchStations(id: Int) async {
-        let result = await api.fetchStations(type: .init(rawValue: id) ?? .all)
-        switch result {
-        case .success(let values): fetchedStations = values.sorted(by: { $0.description < $1.description })
-        case .failure(let error): routeAlert(error: error)
-        }
-        stations = fetchedStations
+    func fetchStations() async {
+        await stations = storageManager.loadStations()
+        guard stations.isEmpty else { return }
+        await fetchStations(id: -1)
+        storageManager.saveStations(stations)
     }
     
-    func fetchStations() async {
-        let result = await api.fetchStations()
+    func fetchStations(id: Int) async {
+        let result = await api.fetchStations(type: .init(rawValue: id) ?? .all)
         switch result {
         case .success(let values): fetchedStations = values.sorted(by: { $0.description < $1.description })
         case .failure(let error): routeAlert(error: error)
@@ -59,15 +60,15 @@ class StationsViewModel: ObservableObject {
     }
     
     func getStationCode(at index: Int) -> String {
-        guard index < stations.count, let code = stations[index].code?.uppercased() else {
+        guard index < stations.count  else {
             routeAlert()
             return StationViewModelError.infoNotFound
         }
-        return code
+        return stations[index].code.uppercased()
     }
     
     func didSelectStation(at index: Int) {
-        route.send(.stationData(stations[index]))
+        route.send(.station(stations[index]))
     }
     
     func search(value text: String?) {
@@ -75,8 +76,8 @@ class StationsViewModel: ObservableObject {
             clearSearch()
             return
         }
-        stations = fetchedStations.filter { station in
-            station.description.lowercased().contains(text.lowercased())
+        stations = fetchedStations.filter {
+            $0.description.lowercased().contains(text.lowercased())
         }
     }
     

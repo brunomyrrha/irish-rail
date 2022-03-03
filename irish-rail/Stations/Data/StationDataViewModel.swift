@@ -11,7 +11,7 @@ import CoreLocation
 
 class StationDataViewModel: ObservableObject {
     
-    enum Route {
+    enum StationDataRoute {
         case alert(AlertModel)
         case trainData(StationData)
     }
@@ -25,31 +25,24 @@ class StationDataViewModel: ObservableObject {
     @Published private(set) var stationData = [StationData]()
     @Published private(set) var location = CLLocation()
     @Published private(set) var isFavorite = false
-    private(set) var route = PassthroughSubject<Route, Never>()
+    private(set) var route = PassthroughSubject<StationDataRoute, Never>()
     
+    let title: String
     private var fetchedStationData = [StationData]()
     private let api: StationDataAPI
     private let storageManager: StorageManager
     private var station: Station?
     
-    init(api: StationDataAPI = StationDataAPIBase.shared, storageManager: StorageManager = StorageManagerBase.shared) {
+    init(station: Station, api: StationDataAPI = StationDataAPIBase.shared, storageManager: StorageManager = StorageManagerBase.shared) {
         self.api = api
         self.storageManager = storageManager
+        self.station = station
+        title = station.description
+        code = station.code
+        setUp(with: station)
     }
     
     // MARK: - Public methods
-
-    func setUp(with station: Station) {
-        guard let code = station.code else {
-            routeAlert()
-            return
-        }
-        self.station = station
-        self.code = code
-        isFavorite = storageManager.isStationSaved(station)
-        name = "\(station.description) Station"
-        tryUpdateLocation(latitude: station.latitude, longitude: station.longitude)
-    }
     
     private func tryUpdateLocation(latitude: Double?, longitude: Double?) {
         guard let latitude = latitude, let longitude = longitude else { return }
@@ -69,7 +62,7 @@ class StationDataViewModel: ObservableObject {
             routeAlert()
             return
         }
-        isFavorite ? storageManager.deleteStation(station) : storageManager.saveStation(station)
+        isFavorite ? storageManager.unfavoriteStation(station) : storageManager.toggleStationFavorite(station)
         isFavorite.toggle()
     }
     
@@ -88,6 +81,12 @@ class StationDataViewModel: ObservableObject {
     }
     
     // MARK: - Private methods
+    
+    private func setUp(with station: Station) {
+        isFavorite = storageManager.isStationSaved(station)
+        name = "\(station.description) Station"
+        tryUpdateLocation(latitude: station.latitude, longitude: station.longitude)
+    }
     
     private func updateStationData(with stationData: [StationData]) {
         DispatchQueue.main.async {

@@ -9,22 +9,27 @@ import Foundation
 
 protocol StorageManager: AnyObject {
     
-    func saveStation(_ station: Station)
+    func toggleStationFavorite(_ station: Station)
     
-    func deleteStation(_ station: Station)
+    func unfavoriteStation(_ station: Station)
     
-    func loadStations() -> [Station]
+    func loadSavedStations() async -> [Station]
+    
+    func loadStations() async -> [Station]
+    
+    func saveStations(_ stations: [Station])
     
     func isStationSaved(_ station: Station) -> Bool
     
     func commitStorage()
     
-    func loadStorage()
+    func loadStorage() async
     
 }
 
 class StorageManagerBase: StorageManager {
-    
+
+    private var favoriteStationsId = Set<Int>()
     private var loadedStations = Set<Station>()
     
     static let shared = StorageManagerBase()
@@ -32,28 +37,42 @@ class StorageManagerBase: StorageManager {
     
     // MARK: - Public methods
     
-    func saveStation(_ station: Station) {
-        loadedStations.insert(station)
+    func toggleStationFavorite(_ station: Station) {
+        favoriteStationsId.insert(station.id)
     }
     
-    func deleteStation(_ station: Station) {
-        loadedStations.remove(station)
+    func unfavoriteStation(_ station: Station) {
+        favoriteStationsId.remove(station.id)
     }
     
     func loadStations() -> [Station] {
         Array(loadedStations.sorted(by: { $0.description < $1.description }))
     }
     
+    func saveStations(_ stations: [Station]) {
+        loadedStations = Set(stations)
+    }
+    
     func isStationSaved(_ station: Station) -> Bool {
-        loadedStations.contains(station)
+        loadedStations.contains(station) && favoriteStationsId.contains(station.id)
+    }
+    
+    func loadSavedStations() async -> [Station] {
+        Array(loadedStations.filter { favoriteStationsId.contains($0.id) }.sorted(by: { $0.code < $1.code} ))
     }
     
     func commitStorage() {
         
     }
     
-    func loadStorage() {
+    func loadStorage() async {
         
     }
     
+    // MARK: - Private methods
+    
+    private func shouldPurgeLocalStorage() -> Bool {
+        false
+    }
+
 }

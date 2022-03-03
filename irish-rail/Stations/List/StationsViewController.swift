@@ -10,14 +10,21 @@ import Combine
 
 class StationsViewController: UIViewController {
     
+    static func initVC() -> StationsViewController {
+        let vc = StationsViewController.initFromStoryboard(named: "StationsView")
+        vc.viewModel = StationsViewModel()
+        return vc
+    }
+    
     @IBOutlet private weak var stationTypeSegmentControl: UISegmentedControl!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
-    private let viewModel = StationsViewModel()
+    private var viewModel: StationsViewModel!
     private var cancellables = Set<AnyCancellable>()
     private let refreshControl = UIRefreshControl()
-    weak var coordinator: StationsCoordinator?
+    weak var coordinator: Coordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,11 +67,13 @@ class StationsViewController: UIViewController {
         stationTypeSegmentControl.isEnabled = false
         UIView.animate(withDuration: 0.25) {
             self.tableView.alpha = 0
+            self.activityIndicator.startAnimating()
         }
     }
     
     private func endLoadAnimation() {
         UIView.animate(withDuration: 0.25) {
+            self.activityIndicator.stopAnimating()
             self.tableView.reloadData()
             self.tableView.alpha = 1
             self.stationTypeSegmentControl.isEnabled = true
@@ -86,7 +95,6 @@ class StationsViewController: UIViewController {
     }
     
     private func observeStations() {
-        startLoadAnimation()
         viewModel.$stations
             .receive(on: RunLoop.main)
             .sink { [unowned self] _ in self.endLoadAnimation() }
@@ -96,10 +104,10 @@ class StationsViewController: UIViewController {
     private func observeRoute() {
         viewModel.route
             .receive(on: RunLoop.main)
-            .sink { [unowned self] in
+            .sink { [weak coordinator] in
                 switch $0 {
-                case .alert(let alert): self.coordinator?.makeAlert(alert)
-                case .stationData(station: let station): self.coordinator?.makeStationData(station)
+                case .alert(let alert): coordinator?.makeAlert(alert)
+                case .station(let station): coordinator?.presentStationsDataView(station)
                 }
             }
             .store(in: &cancellables)

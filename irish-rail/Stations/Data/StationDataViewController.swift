@@ -11,29 +11,31 @@ import Combine
 
 class StationDataViewController: UIViewController {
 
+    static func initVC(station: Station) -> StationDataViewController {
+        let vc = StationDataViewController.initFromStoryboard(named: "StationDataView")
+        vc.viewModel = StationDataViewModel(station: station)
+        return vc
+    }
+    
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var favoriteButton: UIBarButtonItem!
+    @IBOutlet private weak var informationLabel: UILabel!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
-    private let viewModel = StationDataViewModel()
+    private var viewModel: StationDataViewModel!
     private var cancellables = Set<AnyCancellable>()
     private var centerLocation = CLLocationCoordinate2D()
-    weak var coordinator: StationsCoordinator?
+    weak var coordinator: Coordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = viewModel.title
         setUp()
         observe()
         fetchStationData()
-    }
-    
-    // MARK: - Public methods
-    
-    func inject(model: Station) {
-        title = model.code
-        viewModel.setUp(with: model)
     }
     
     // MARK: - IBActions
@@ -64,19 +66,18 @@ class StationDataViewController: UIViewController {
     private func startLoadAnimation() {
         UIView.animate(withDuration: 0.25) {
             self.tableView.alpha = 0
+            self.informationLabel.isHidden = true
+            self.activityIndicator.startAnimating()
         }
     }
     
     private func endLoadAnimation() {
         UIView.animate(withDuration: 0.25) {
             self.tableView.reloadData()
+            self.activityIndicator.stopAnimating()
+            self.tableView.isHidden = self.viewModel.stationData.isEmpty
+            self.informationLabel.isHidden = !self.viewModel.stationData.isEmpty
             self.tableView.alpha = 1
-        }
-    }
-    
-    private func toggleTableViewVisibility(isHidden: Bool) {
-        UIView.animate(withDuration: 0.25) {
-            self.tableView.alpha = isHidden ? 0 : 1
         }
     }
     
@@ -119,10 +120,7 @@ class StationDataViewController: UIViewController {
     private func observeStationData() {
         viewModel.$stationData
             .receive(on: RunLoop.main)
-            .sink { [unowned self] stationData in
-                self.toggleTableViewVisibility(isHidden: stationData.isEmpty)
-                self.endLoadAnimation()
-            }
+            .sink { [unowned self] _ in self.endLoadAnimation() }
             .store(in: &cancellables)
     }
     
@@ -149,7 +147,7 @@ class StationDataViewController: UIViewController {
             .sink { [unowned self] in
                 switch $0 {
                 case .alert(let alert): self.coordinator?.makeAlert(alert)
-                case .trainData(let data): self.coordinator?.makeTrain(data)
+                case .trainData(let train): self.coordinator?.presentTrainsView(train)
                 }
             }
             .store(in: &cancellables)

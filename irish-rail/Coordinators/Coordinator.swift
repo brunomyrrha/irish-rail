@@ -15,9 +15,19 @@ protocol Coordinator: AnyObject {
     
     func makeAlert(_ alert: AlertModel)
     
+    func presentTrainsView(_ trains: StationData)
+        
+    func presentStationsDataView(_ station: Station)
+    
+    func presentStationsView()
+    
+    func presentFavoritesView()
+    
 }
 
 extension Coordinator {
+    
+    var errorMessage: String { "AppCoordinator can't present ViewControllers" }
     
     func makeAlert(_ alert: AlertModel) {
         let alert = UIAlertController(title: alert.title, message: alert.message, preferredStyle: .alert)

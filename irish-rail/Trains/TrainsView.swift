@@ -9,6 +9,12 @@ import SwiftUI
 
 struct TrainsView: View {
     
+    static func initVC(trains: StationData) -> UIHostingController<TrainsView> {
+        let view = TrainsView(model: trains)
+        let hostingViewController = UIHostingController(rootView: view)
+        return hostingViewController
+    }
+    
     @State private var didAppear = false
     
     let model: StationData
@@ -16,13 +22,13 @@ struct TrainsView: View {
     
     var body: some View {
         ZStack {
-            SecondarySystemBackground
+            SecondarySystemBackgroundColor
                 .ignoresSafeArea()
             VStack(alignment: .leading, spacing: 12) {
                 Title
-                    .padding(.bottom, 16)
+                    .padding(.bottom)
                 Station
-                Eta
+                Train
                 TimeSchedule
                 DueTime
                     .padding(.vertical, 24)
@@ -38,8 +44,9 @@ struct TrainsView: View {
     @ViewBuilder private var Title: some View {
         HStack(alignment: .center, spacing: 0) {
             Text("Train Status")
-                .font(.system(size: 38, weight: .bold))
-                .padding(.leading, 16)
+                .font(.largeTitle)
+                .bold()
+                .padding(.leading)
             Spacer()
             Code
         }
@@ -53,18 +60,16 @@ struct TrainsView: View {
             .background(SystemGray)
             .foregroundColor(SystemGray6)
             .cornerRadius(12)
-            .padding(.horizontal, 16)
+            .padding(.horizontal)
     }
     
     @ViewBuilder private var Station: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Destination")
-                .foregroundColor(SystemGray)
-                .padding(.leading)
+            MakeCardTitle("Destination")
             HStack(alignment: .center) {
                 VStack(alignment: .leading) {
                     Text(model.destination)
-                        .font(.system(size: 32, weight: .bold))
+                        .font(.title)
                 }
                 Spacer()
                 StationSign
@@ -74,39 +79,33 @@ struct TrainsView: View {
             .padding()
             .background(CardBackground)
         }
-        .padding(.horizontal, 16)
     }
     
     @ViewBuilder private var StationSign: some View {
         Text((model.locationType ?? "...").uppercased())
             .font(.system(size: 32, weight: .heavy))
             .frame(width: 40, height: 40, alignment: .center)
-            .foregroundColor(SecondarySystemBackground)
+            .foregroundColor(SystemBackgroundColor)
             .background(SignBackgroundColor)
             .cornerRadius(8)
     }
     
     @ViewBuilder private var TimeSchedule: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Train")
-                .foregroundColor(SystemGray)
-                .padding(.leading)
+            MakeCardTitle("Train")
             VStack {
                 MakeTableItem(key: "Train Code", value: model.trainCode)
                 MakeTableItem(key: "Departure", value: model.expDeparture ?? noInfo)
-                MakeTableItem(key: "Time difference", value: model.late ?? noInfo)
+                MakeTableItem(key: "Split difference", value: model.late ?? noInfo)
             }
             .padding()
             .background(CardBackground)
         }
-        .padding(.horizontal, 16)
     }
     
-    @ViewBuilder private var Eta: some View {
+    @ViewBuilder private var Train: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Status")
-                .foregroundColor(SystemGray)
-                .padding(.leading)
+            MakeCardTitle("Status")
             VStack {
                 MakeTableItem(key: "From", value: model.origin ?? noInfo)
                 MakeTableItem(key: "Status", value: model.status ?? noInfo)
@@ -115,20 +114,27 @@ struct TrainsView: View {
             .padding()
             .background(CardBackground)
         }
-        .padding(.horizontal, 16)
     }
     
     @ViewBuilder private var DueTime: some View {
-            HStack {
-                Spacer()
-                Text(Due)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(SecondarySystemBackground)
-                Spacer()
-            }
-            .padding(24)
-            .background(DueBackgroundColor)
-            .animation(.easeIn, value: didAppear)
+        HStack {
+            Spacer()
+            Text(Due)
+                .font(.title3)
+                .bold()
+                .foregroundColor(SystemBackgroundColor)
+            Spacer()
+        }
+        .padding()
+        .background(DueBackgroundColor)
+        .animation(.easeIn, value: didAppear)
+    }
+    
+    @ViewBuilder private func MakeCardTitle(_ title: String) -> some View {
+        Text(title)
+            .font(.caption)
+            .foregroundColor(SystemGray)
+            .padding(.leading)
     }
     
     @ViewBuilder private func MakeTableItem(key: String, value: String) -> some View {
@@ -143,9 +149,8 @@ struct TrainsView: View {
     
     @ViewBuilder private var CardBackground: some View {
         Rectangle()
-            .foregroundColor(SystemBackground)
+            .foregroundColor(SystemBackgroundColor)
             .cornerRadius(4)
-            .shadow(color: ShadowColor, radius: 4, x: 0, y: 2)
     }
     
     // MARK: - Private methods
@@ -154,7 +159,7 @@ struct TrainsView: View {
         switch (model.locationType ?? "A").lowercased() {
         case "d": return .mint
         case "s": return .indigo
-        case "m": return .orange
+        case "o": return .orange
         default: return .accentColor
         }
     }
@@ -183,11 +188,11 @@ struct TrainsView: View {
         Color(.sRGB, red: 0, green: 0, blue: 0, opacity: 0.10)
     }
     
-    private var SystemBackground: Color {
+    private var SystemBackgroundColor: Color {
         Color(uiColor: UIColor.systemBackground)
     }
     
-    private var SecondarySystemBackground: Color {
+    private var SecondarySystemBackgroundColor: Color {
         Color(uiColor: UIColor.secondarySystemBackground)
     }
     
