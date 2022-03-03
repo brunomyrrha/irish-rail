@@ -7,28 +7,53 @@
 
 import UIKit
 
-class AppCoordinator: Coordinator {
+class AppCoordinator {
     
-    let navigationController: UINavigationController
-    var childCoordinators: [Coordinator]
+    private let stationNavigationController: UINavigationController
+    private let favoriteNavigationController: UINavigationController
+    private let tabBarController: UITabBarController
+    private var childCoordinators: [Coordinator]
     
     // MARK: - Lifecycle
     
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init(tabBarController: UITabBarController) {
+        self.tabBarController = tabBarController
+        stationNavigationController = UINavigationController()
+        favoriteNavigationController = UINavigationController()
         childCoordinators = []
+        configureTabBarController()
     }
     
     // MARK: - Coordinator methods
     
     func start() {
-        makeAppCoordinator()
+        makeStationCoordinator()
+        makeFavoriteCoordinator()
     }
     
     // MARK: - Private methods
     
-    private func makeAppCoordinator() {
-        let coordinator = StationsCoordinator(navigationController: navigationController)
+    private func configureTabBarController() {
+        let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithDefaultBackground()
+        tabBarAppearance.backgroundColor = UIColor.white
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        tabBarController.viewControllers = [stationNavigationController, favoriteNavigationController]
+    }
+    
+    private func makeStationCoordinator() {
+        let tabBarItem = UITabBarItem(title: "Stations", image: UIImage(systemName: "tram"), tag: 0)
+        stationNavigationController.tabBarItem = tabBarItem
+        let coordinator = StationsCoordinator(navigationController: stationNavigationController)
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
+    
+    private func makeFavoriteCoordinator() {
+        let tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "bookmark"), tag: 1)
+        favoriteNavigationController.tabBarItem = tabBarItem
+        let coordinator = FavoritesCoordinator(navigationController: favoriteNavigationController)
         childCoordinators.append(coordinator)
         coordinator.start()
     }

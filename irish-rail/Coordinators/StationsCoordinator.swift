@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class StationsCoordinator: Coordinator {
     
@@ -23,20 +24,17 @@ class StationsCoordinator: Coordinator {
         navigationController.pushViewController(viewController, animated: false)
     }
     
-    func dismiss() {
-        navigationController.popViewController(animated: true)
-    }
-    
-    func makeAlert(_ alert: AlertModel) {
-        let alert = UIAlertController(title: alert.title, message: alert.message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        navigationController.present(alert, animated: true, completion: nil)
-    }
-    
-    func makeStationDetails(_ station: Station) {
-        let viewController = StationDetailsViewController.initFromStoryboard(named: "StationDetails")
+    func makeStationData(_ station: Station) {
+        let viewController = StationDataViewController.initFromStoryboard(named: "StationDataView")
+        viewController.coordinator = self
         viewController.inject(model: station)
         navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func makeTrain(_ data: StationData) {
+        let view = TrainsView(model: data)
+        let hostingViewController = UIHostingController(rootView: view)
+        navigationController.present(hostingViewController, animated: true, completion: nil)
     }
     
 }

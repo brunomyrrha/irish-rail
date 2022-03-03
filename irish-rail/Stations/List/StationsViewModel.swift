@@ -10,19 +10,18 @@ import Combine
 
 class StationsViewModel: ObservableObject {
     
-    enum StationRoute {
-        case initial
-        case alert(alert: AlertModel)
-        case stationDetails(station: Station)
+    enum Route {
+        case alert(AlertModel)
+        case stationData(Station)
     }
     
     private enum StationViewModelError: Error {
-        static var defaultErrorMessage: String { "Something is wrong. Try again later." }
+        static var defaultErrorMessage: String { "Station data has an issue. Try again later." }
         static var infoNotFound: String { "Station info not found" }
     }
     
     @Published private(set) var stations = [Station]()
-    @Published private(set) var route = PassthroughSubject<StationRoute, Never>()
+    private(set) var route = PassthroughSubject<Route, Never>()
     
     private var fetchedStations = [Station]()
     private let api: StationsAPI
@@ -68,7 +67,7 @@ class StationsViewModel: ObservableObject {
     }
     
     func didSelectStation(at index: Int) {
-        route.send(.stationDetails(station: stations[index]))
+        route.send(.stationData(stations[index]))
     }
     
     func search(value text: String?) {
@@ -91,7 +90,7 @@ class StationsViewModel: ObservableObject {
         stations.removeAll()
         let message = error?.localizedDescription ?? StationViewModelError.defaultErrorMessage
         let alert = AlertModel(message: message)
-        route.send(.alert(alert: alert))
+        route.send(.alert(alert))
     }
     
 }

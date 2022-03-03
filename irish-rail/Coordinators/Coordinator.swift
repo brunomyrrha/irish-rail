@@ -13,4 +13,20 @@ protocol Coordinator: AnyObject {
     
     func start()
     
+    func makeAlert(_ alert: AlertModel)
+    
+}
+
+extension Coordinator {
+    
+    func makeAlert(_ alert: AlertModel) {
+        let alert = UIAlertController(title: alert.title, message: alert.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        navigationController.present(alert, animated: true, completion: nil)
+    }
+    
+    func dismiss() {
+        navigationController.popViewController(animated: true)
+    }
+    
 }

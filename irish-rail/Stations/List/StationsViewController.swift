@@ -89,18 +89,17 @@ class StationsViewController: UIViewController {
         startLoadAnimation()
         viewModel.$stations
             .receive(on: RunLoop.main)
-            .sink { [weak self] _ in self?.endLoadAnimation() }
+            .sink { [unowned self] _ in self.endLoadAnimation() }
             .store(in: &cancellables)
     }
     
     private func observeRoute() {
         viewModel.route
             .receive(on: RunLoop.main)
-            .sink { [weak self] in
+            .sink { [unowned self] in
                 switch $0 {
-                case .initial: break
-                case .alert(let alert): self?.coordinator?.makeAlert(alert)
-                case .stationDetails(station: let station): self?.coordinator?.makeStationDetails(station)
+                case .alert(let alert): self.coordinator?.makeAlert(alert)
+                case .stationData(station: let station): self.coordinator?.makeStationData(station)
                 }
             }
             .store(in: &cancellables)

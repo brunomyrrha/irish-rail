@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,25 +12,25 @@
         <!--Details-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="StationDetailsViewController" title="Details" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="StationDetailsViewController" customModule="irish_rail" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StationDataViewController" title="Details" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="StationDataViewController" customModule="irish_rail" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView multipleTouchEnabled="YES" contentMode="scaleAspectFit" verticalHuggingPriority="252" mapType="standard" showsUserLocation="YES" showsPointsOfInterest="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="13I-nA-JHL">
-                                <rect key="frame" x="0.0" y="88" width="414" height="240"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="180"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="aBg-ka-0jh"/>
+                                    <constraint firstAttribute="height" constant="180" id="aBg-ka-0jh"/>
                                 </constraints>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Station Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ns3-Ps-oM8">
-                                <rect key="frame" x="16" y="344" width="382" height="29"/>
+                                <rect key="frame" x="16" y="284" width="382" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="AccentColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cpW-oe-X2Y" userLabel="Name Label Action">
-                                <rect key="frame" x="16" y="344" width="382" height="29"/>
+                                <rect key="frame" x="16" y="284" width="382" height="29"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain"/>
                                 <connections>
@@ -37,14 +38,20 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0j5-lx-uGe" userLabel="Separator View">
-                                <rect key="frame" x="0.0" y="389" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="329" width="414" height="1"/>
                                 <color key="backgroundColor" systemColor="separatorColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Gbo-iR-V8X"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No trains due in the next 90 minutes" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GeD-Zj-sjv">
+                                <rect key="frame" x="64" y="330" width="286" height="566"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="muO-lR-rpc">
-                                <rect key="frame" x="0.0" y="390" width="414" height="506"/>
+                                <rect key="frame" x="0.0" y="330" width="414" height="566"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StationDataCell" textLabel="KrF-H2-H9P" style="IBUITableViewCellStyleDefault" id="6nK-xy-aeE">
@@ -77,21 +84,25 @@
                             <constraint firstItem="Ns3-Ps-oM8" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" priority="999" id="PHh-3k-bbh"/>
                             <constraint firstItem="Ns3-Ps-oM8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="W9N-h6-mck"/>
                             <constraint firstItem="muO-lR-rpc" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="WBW-tA-pTc"/>
+                            <constraint firstItem="GeD-Zj-sjv" firstAttribute="trailing" secondItem="muO-lR-rpc" secondAttribute="trailing" constant="-64" id="XYY-Zp-GVe"/>
                             <constraint firstAttribute="bottom" secondItem="muO-lR-rpc" secondAttribute="bottom" id="Xhz-T7-7hF"/>
                             <constraint firstItem="13I-nA-JHL" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Y8w-PS-vE3"/>
+                            <constraint firstItem="GeD-Zj-sjv" firstAttribute="leading" secondItem="muO-lR-rpc" secondAttribute="leading" constant="64" id="ZcY-w2-gwO"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0j5-lx-uGe" secondAttribute="trailing" id="Zpq-1o-NB3"/>
                             <constraint firstItem="cpW-oe-X2Y" firstAttribute="trailing" secondItem="Ns3-Ps-oM8" secondAttribute="trailing" id="ZtX-HC-lrW"/>
                             <constraint firstItem="0j5-lx-uGe" firstAttribute="top" secondItem="Ns3-Ps-oM8" secondAttribute="bottom" constant="16" id="gGG-VC-BOG"/>
                             <constraint firstItem="13I-nA-JHL" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="h7n-Ny-JeP"/>
+                            <constraint firstItem="GeD-Zj-sjv" firstAttribute="top" secondItem="muO-lR-rpc" secondAttribute="top" id="ofV-QV-539"/>
                             <constraint firstItem="cpW-oe-X2Y" firstAttribute="bottom" secondItem="Ns3-Ps-oM8" secondAttribute="bottom" id="rt0-ei-oOg"/>
                             <constraint firstItem="13I-nA-JHL" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="rvK-6I-jkp"/>
+                            <constraint firstItem="GeD-Zj-sjv" firstAttribute="bottom" secondItem="muO-lR-rpc" secondAttribute="bottom" id="xbD-m6-Lg9"/>
                             <constraint firstItem="muO-lR-rpc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ywz-Cj-RA6"/>
                             <constraint firstItem="muO-lR-rpc" firstAttribute="top" secondItem="0j5-lx-uGe" secondAttribute="bottom" id="yxF-D9-WRH"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Ns3-Ps-oM8" secondAttribute="trailing" constant="16" id="zJo-0c-t4b"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="qRz-3P-Ldp">
-                        <barButtonItem key="rightBarButtonItem" title="Favorite" image="star" catalog="system" id="Xep-eW-lsH">
+                        <barButtonItem key="rightBarButtonItem" title="Favorite" image="bookmark" catalog="system" id="Xep-eW-lsH">
                             <connections>
                                 <action selector="didTapFavorite:" destination="Y6W-OH-hqX" id="VIQ-Je-yRO"/>
                             </connections>
@@ -99,6 +110,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="favoriteButton" destination="Xep-eW-lsH" id="Oup-hu-3YB"/>
                         <outlet property="mapView" destination="13I-nA-JHL" id="gKZ-cS-WJ7"/>
                         <outlet property="nameLabel" destination="Ns3-Ps-oM8" id="3kX-jW-AR3"/>
                         <outlet property="tableView" destination="muO-lR-rpc" id="pAN-PW-Vxc"/>
@@ -110,7 +122,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="star" catalog="system" width="128" height="116"/>
+        <image name="bookmark" catalog="system" width="112" height="128"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="separatorColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Station: Equatable {
+struct Station: Equatable, Hashable, Codable {
     
     private enum Keys {
         

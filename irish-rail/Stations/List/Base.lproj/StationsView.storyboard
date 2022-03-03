@@ -67,12 +67,16 @@
                         <constraints>
                             <constraint firstItem="Yy4-fj-bzK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5Gj-2a-eWw"/>
                             <constraint firstItem="doZ-JV-SdM" firstAttribute="top" secondItem="Yy4-fj-bzK" secondAttribute="bottom" id="HFK-Mr-jSL"/>
+                            <constraint firstItem="doZ-JV-SdM" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="MpK-qQ-6tw"/>
                             <constraint firstItem="YOp-so-rVG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NMY-dq-ie4"/>
+                            <constraint firstItem="doZ-JV-SdM" firstAttribute="top" secondItem="Yy4-fj-bzK" secondAttribute="bottom" id="R4t-mZ-n5D"/>
                             <constraint firstItem="YOp-so-rVG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Xu8-KT-GC4"/>
                             <constraint firstItem="Yy4-fj-bzK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cTm-Ep-qnn"/>
                             <constraint firstItem="doZ-JV-SdM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="d05-zZ-47v"/>
                             <constraint firstItem="doZ-JV-SdM" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jpD-iI-0zh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="doZ-JV-SdM" secondAttribute="bottom" id="m4M-lX-xSN"/>
+                            <constraint firstItem="doZ-JV-SdM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mYc-O4-dpO"/>
+                            <constraint firstItem="doZ-JV-SdM" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="p2h-gY-pvb"/>
                             <constraint firstItem="Yy4-fj-bzK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vIw-Pr-P2e"/>
                         </constraints>
                     </view>

@@ -1,5 +1,5 @@
 //
-//  StationDetailsViewController.swift
+//  StationDataViewController.swift
 //  irish-rail
 //
 //  Created by Bruno Diniz on 28/02/2022.
@@ -9,13 +9,14 @@ import UIKit
 import MapKit
 import Combine
 
-class StationDetailsViewController: UIViewController {
+class StationDataViewController: UIViewController {
 
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var favoriteButton: UIBarButtonItem!
     
-    private let viewModel = StationDetailsViewModel()
+    private let viewModel = StationDataViewModel()
     private var cancellables = Set<AnyCancellable>()
     private var centerLocation = CLLocationCoordinate2D()
     weak var coordinator: StationsCoordinator?
@@ -38,7 +39,7 @@ class StationDetailsViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction func didTapFavorite(_ sender: Any) {
-        viewModel.favoriteStation()
+        viewModel.favoriteStationToggle()
     }
     
     @IBAction func didTapStationName(_ sender: Any) {
@@ -73,6 +74,12 @@ class StationDetailsViewController: UIViewController {
         }
     }
     
+    private func toggleTableViewVisibility(isHidden: Bool) {
+        UIView.animate(withDuration: 0.25) {
+            self.tableView.alpha = isHidden ? 0 : 1
+        }
+    }
+    
     private func updateMap(location: CLLocation) {
         centerLocation = location.coordinate
         let region = MKCoordinateRegion(center: centerLocation, latitudinalMeters: 2000, longitudinalMeters: 2000)
@@ -91,6 +98,8 @@ class StationDetailsViewController: UIViewController {
         observeName()
         observeStationData()
         observeLocation()
+        observeIsFavorite()
+        observeRoute()
     }
     
     private func observeCode() {
@@ -110,7 +119,10 @@ class StationDetailsViewController: UIViewController {
     private func observeStationData() {
         viewModel.$stationData
             .receive(on: RunLoop.main)
-            .sink { [unowned self] _ in self.endLoadAnimation() }
+            .sink { [unowned self] stationData in
+                self.toggleTableViewVisibility(isHidden: stationData.isEmpty)
+                self.endLoadAnimation()
+            }
             .store(in: &cancellables)
     }
     
@@ -121,9 +133,31 @@ class StationDetailsViewController: UIViewController {
             .store(in: &cancellables)
     }
     
+    private func observeIsFavorite() {
+        viewModel.$isFavorite
+            .receive(on: RunLoop.main)
+            .sink { [unowned self] isFavorite in
+                let imageName = isFavorite ? "bookmark.fill" : "bookmark"
+                self.favoriteButton.image = UIImage(systemName: imageName)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func observeRoute() {
+        viewModel.route
+            .receive(on: RunLoop.main)
+            .sink { [unowned self] in
+                switch $0 {
+                case .alert(let alert): self.coordinator?.makeAlert(alert)
+                case .trainData(let data): self.coordinator?.makeTrain(data)
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
 }
 
-extension StationDetailsViewController: UITableViewDelegate, UITableViewDataSource {
+extension StationDataViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.stationData.count
@@ -136,6 +170,11 @@ extension StationDetailsViewController: UITableViewDelegate, UITableViewDataSour
         content.secondaryText = viewModel.getTime(at: indexPath.row)
         cell.contentConfiguration = content
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.didSelectTimeSchedule(at: indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

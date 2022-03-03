@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StationData: Equatable {
+struct StationData: Equatable, Codable {
     
     private enum Keys {
         
@@ -55,7 +55,7 @@ struct StationData: Equatable {
     var schDeparture: String?
     var direction: String?
     var trainType: String?
-    var locationType: Character?
+    var locationType: String?
     
     init?(from dictionary: [String: Any]) {
         guard let fullName = dictionary[Keys.stationFullName] as? String,
@@ -82,7 +82,7 @@ struct StationData: Equatable {
         schDeparture = dictionary[Keys.schDepart] as? String
         direction = dictionary[Keys.direction] as? String
         trainType = dictionary[Keys.trainType] as? String
-        locationType = dictionary[Keys.locationType] as? Character
+        locationType = dictionary[Keys.locationType] as? String
     }
     
 }
