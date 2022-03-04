@@ -40,7 +40,7 @@ class StorageManagerSpy: StorageManager {
         return []
     }
     
-    func saveStations(_ stations: [Station]) {
+    func cacheStations(_ stations: [Station]) {
         didSaveStation = true
     }
     

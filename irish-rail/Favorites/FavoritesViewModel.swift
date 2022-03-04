@@ -32,8 +32,8 @@ class FavoritesViewModel: ObservableObject {
     
     // MARK: - Public methods
     
-    func loadSavedStations() async {
-        await storedStations = storageManager.loadSavedStations()
+    func loadSavedStations() {
+        storedStations = storageManager.loadFavoriteStations()
         favoriteStations = storedStations
     }
     

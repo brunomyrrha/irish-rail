@@ -24,7 +24,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
     }
     
-    func sceneDidEnterBackground(_ scene: UIScene) {
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        StorageManagerBase.shared.loadStorage()
+    }
+    
+    func sceneWillEnterForeground(_ scene: UIScene) {
         StorageManagerBase.shared.commitStorage()
     }
 

@@ -12,9 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Task.detached {
-            await StorageManagerBase.shared.loadStorage()
-        }
+        StorageManagerBase.shared.loadStorage()
         return true
     }
 

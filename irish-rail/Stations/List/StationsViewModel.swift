@@ -36,7 +36,7 @@ class StationsViewModel: ObservableObject {
     // MARK: - Public methods
     
     func fetchStations() async {
-        await stations = storageManager.loadStations()
+        stations = storageManager.loadCachedStations()
         guard stations.isEmpty else { return }
         let result = await api.fetchStations()
         switch result {
@@ -44,7 +44,7 @@ class StationsViewModel: ObservableObject {
         case .failure(let error): routeAlert(error: error)
         }
         stations = fetchedStations
-        storageManager.saveStations(stations)
+        storageManager.cacheStations(stations)
     }
     
     func fetchStations(id: Int) async {
