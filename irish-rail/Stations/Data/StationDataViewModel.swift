@@ -28,7 +28,6 @@ class StationDataViewModel: ObservableObject {
     private(set) var route = PassthroughSubject<StationDataRoute, Never>()
     
     let title: String
-    private var fetchedStationData = [StationData]()
     private let api: StationDataAPI
     private let storageManager: StorageManager
     private var station: Station?
@@ -44,16 +43,11 @@ class StationDataViewModel: ObservableObject {
     
     // MARK: - Public methods
     
-    private func tryUpdateLocation(latitude: Double?, longitude: Double?) {
-        guard let latitude = latitude, let longitude = longitude else { return }
-        location = CLLocation(latitude: latitude, longitude: longitude)
-    }
-    
     func fetchStationData() async {
         let result = await api.fetchInfo(from: code)
         switch result {
         case .success(let values): updateStationData(with: values)
-        case .failure(let error): print(error)
+        case .failure(let error): routeAlert(error: error)
         }
     }
     
@@ -62,14 +56,14 @@ class StationDataViewModel: ObservableObject {
             routeAlert()
             return
         }
-        isFavorite ? storageManager.unfavoriteStation(station) : storageManager.toggleStationFavorite(station)
+        isFavorite ? storageManager.unfavoriteStation(station) : storageManager.favoriteStation(station)
         isFavorite.toggle()
     }
     
     func getTime(at idx: Int) -> String {
         guard let dueMinutes = Int(stationData[idx].dueIn) else { return "Can't detect due time" }
         let dueTextFormat = "Due in %i minutes"
-        return dueMinutes > .zero ? String(format: dueTextFormat, dueMinutes) : "Due"
+        return dueMinutes > 1 ? String(format: dueTextFormat, dueMinutes) : "Due"
     }
     
     func getDirection(at idx: Int) -> String {
@@ -82,6 +76,11 @@ class StationDataViewModel: ObservableObject {
     
     // MARK: - Private methods
     
+    private func tryUpdateLocation(latitude: Double?, longitude: Double?) {
+        guard let latitude = latitude, let longitude = longitude else { return }
+        location = CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
     private func setUp(with station: Station) {
         isFavorite = storageManager.isStationSaved(station)
         name = "\(station.description) Station"
@@ -89,9 +88,7 @@ class StationDataViewModel: ObservableObject {
     }
     
     private func updateStationData(with stationData: [StationData]) {
-        DispatchQueue.main.async {
-            self.stationData = stationData.sorted(by: { Int($0.dueIn) ?? .zero < Int($1.dueIn) ?? .zero })
-        }
+        self.stationData = stationData.sorted(by: { Int($0.dueIn) ?? .zero < Int($1.dueIn) ?? .zero })
     }
     
     private func routeAlert(error: Error? = nil) {

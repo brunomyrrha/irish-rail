@@ -9,7 +9,7 @@ import Foundation
 
 protocol StorageManager: AnyObject {
     
-    func toggleStationFavorite(_ station: Station)
+    func favoriteStation(_ station: Station)
     
     func unfavoriteStation(_ station: Station)
     
@@ -37,7 +37,7 @@ class StorageManagerBase: StorageManager {
     
     // MARK: - Public methods
     
-    func toggleStationFavorite(_ station: Station) {
+    func favoriteStation(_ station: Station) {
         favoriteStationsId.insert(station.id)
     }
     
@@ -62,11 +62,11 @@ class StorageManagerBase: StorageManager {
     }
     
     func commitStorage() {
-        
+        print("Save")
     }
     
     func loadStorage() async {
-        
+        print("Load")
     }
     
     // MARK: - Private methods

@@ -38,7 +38,12 @@ class StationsViewModel: ObservableObject {
     func fetchStations() async {
         await stations = storageManager.loadStations()
         guard stations.isEmpty else { return }
-        await fetchStations(id: -1)
+        let result = await api.fetchStations()
+        switch result {
+        case .success(let values): fetchedStations = values.sorted(by: { $0.description < $1.description })
+        case .failure(let error): routeAlert(error: error)
+        }
+        stations = fetchedStations
         storageManager.saveStations(stations)
     }
     
