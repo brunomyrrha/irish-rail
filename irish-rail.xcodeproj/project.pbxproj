@@ -594,6 +594,7 @@
 				DEVELOPMENT_TEAM = M7WGV6L4K2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "irish-rail/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "My Irish Rail";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -604,7 +605,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "diniz.bruno.irish-rail";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -623,6 +624,7 @@
 				DEVELOPMENT_TEAM = M7WGV6L4K2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "irish-rail/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "My Irish Rail";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -633,7 +635,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "diniz.bruno.irish-rail";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
