@@ -62,7 +62,6 @@
 		522C246427D186CF0080C436 /* TestMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMocks.swift; sourceTree = "<group>"; };
 		522C246627D18D910080C436 /* StationDataViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDataViewModelTests.swift; sourceTree = "<group>"; };
 		522C246827D1946C0080C436 /* FavoritesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModelTests.swift; sourceTree = "<group>"; };
-		522C246A27D1A9750080C436 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		522CCE9C27CD624C0059CE5B /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		522CCEA027CD70400059CE5B /* StationDataView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StationDataView.storyboard; sourceTree = "<group>"; };
 		522CCEA227CD71730059CE5B /* StationDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDataViewController.swift; sourceTree = "<group>"; };
@@ -250,7 +249,6 @@
 				521FDF8D27CBEF4300BAC602 /* Stations */,
 				52EA918D27CA408800FF632C /* LaunchScreen.storyboard */,
 				52EA919027CA408800FF632C /* Info.plist */,
-				522C246A27D1A9750080C436 /* Readme.md */,
 			);
 			path = "irish-rail";
 			sourceTree = "<group>";
